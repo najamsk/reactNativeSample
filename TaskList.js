@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import TaskRow from './TaskRow/Component';
+import eventsApi from './api/EventsApi';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,6 +72,9 @@ class TaskList extends React.Component {
       <TaskRow event={event} />
     );
   }
+  componentDidMount(){
+    //this.props.loadEvents();
+  }
 
   render() {
     console.log('eventslist render fn');
@@ -88,6 +92,7 @@ class TaskList extends React.Component {
 
 TaskList.propTypes = {
   events: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+
 };
 
 export default TaskList;

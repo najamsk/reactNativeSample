@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import eventsApi from './api/EventsApi';
 
-const defaultEvents = [];
+const defaultEvents = [{ Title: 'dummy' }];
 const defaultState = {
   events: defaultEvents,
 };

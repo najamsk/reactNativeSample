@@ -20,16 +20,6 @@ class EventsApi {
     .catch((error) => {
       console.error(error);
     });
-
-    // return new Promise((resolve, reject) => {
-    //
-    //   resolve(Object.assign([], events));
-    //
-    //   // setTimeout(() => {
-    //   //   resolve(Object.assign([], courses));
-    //   // }, delay);
-    //
-    // });
   }
 }
 
