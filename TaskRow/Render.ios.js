@@ -20,10 +20,10 @@ const localStyle = StyleSheet.create({
   },
 });
 
-export default function render (baseStyle){
+export default function render(baseStyle) {
   alert(baseStyle);
   console.log(baseStyle);
-  const buttons =[
+  const buttons= [
     {
       text: 'Done',
       backgroundColor: '#5A5D1',
@@ -35,7 +35,7 @@ export default function render (baseStyle){
     <View style={localStyle.container}>
       <Swipeout backgroundColor="#fff" right={buttons}>
         <View style={[baseStyle.container, localStyle.row]}>
-          <Text style={baseStyle.label}>{this.props.todo.task}</Text>
+          <Text style={baseStyle.label}>{this.props.event.title}</Text>
 
         </View>
       </Swipeout>

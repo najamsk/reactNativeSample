@@ -13,75 +13,19 @@ import store from './todoStore';
 
 
 class PluralTodo extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
       super(props, context);
       this.state = store.getState();
-
       //once store is changed we need update state so subscribe to store
       store.subscribe(()=>{
         this.setState(store.getState());
       });
   }
 
-  onAddStarted(){
-    console.log('on add started');
-    //alert('on add started');
-
-    this.nav.push({
-      name: 'taskform'
-    });
-  }
-
-  onCancel(){
-    this.nav.pop();
-  }
-
-  onAdd(task){
-    // this.state.todos.push({
-    //     task: task
-    // });
-    // this.setState({todos: this.state.todos});
-
-    store.dispatch({
-      type: 'ADD_TODO',
-      task: task,
-    })
-
-    this.nav.pop();
-  }
-
-  onDone(todo){
-    //todo.task
-    // const filteredTodos =
-    // this.state.todos.filter((filterTodo) => {
-    //   return filterTodo !== todo
-    // });
-
-    // this.setState({todos: filteredTodos});
-
-    store.dispatch({
-      type: 'DONE_TODO',
-      todo: todo,
-    });
-
-  }
-
-  onToggle(){
-    store.dispatch({type: 'TOGGLE_STATE'});
-  }
-
-  renderScene (route, nav){
+  renderScene (route, nav) {
     switch (route.name){
-      case 'taskform':
-        return (<TaskForm
-          onCancel={this.onCancel.bind(this)}
-          onAdd={this.onAdd.bind(this)}/>);
       default:
-        return (<TaskList todos={this.state.filteredTodos}
-          onDone={this.onDone.bind(this)}
-          filter={this.state.filter}
-          onToggle= {this.onToggle.bind(this)}
-          onAddStarted= {this.onAddStarted.bind(this)}/>);
+        return (<TaskList events={this.state.events} />);
     }
   }
 
@@ -89,6 +33,7 @@ configureScene(){
   return Navigator.SceneConfigs.FloatFromBottom;
 }
   render() {
+    console.log('todoapp render fn');
     return (
       <Navigator
         configureScene= {this.configureScene}
@@ -105,9 +50,7 @@ configureScene(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-
-
+    backgroundColor: '#FEE',
   },
 });
 

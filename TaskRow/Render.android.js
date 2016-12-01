@@ -4,12 +4,11 @@ import {
   Text,
   StyleSheet,
   Image,
-  Animated,
+  View,
   TouchableHighlight,
 } from 'react-native';
 
 export default function render(baseStyle) {
-  const doneAnimation = new Animated.ValueXY();
 
   const localStyle = StyleSheet.create({
     doneButton: {
@@ -17,38 +16,13 @@ export default function render(baseStyle) {
       padding: 5,
     },
 
-    row: {
-      transform: doneAnimation.getTranslateTransform(),
-    },
-
   });
 
-  // function animtedPress() {
-  //   Animated.spring(doneAnimation, {
-  //     tension: 2,
-  //     friction: 3,
-  //     toValue: {
-  //       x: -500,
-  //       y: 0
-  //     }
-  //   }).start(()=>{
-  //     this.onDonePressed();
-  //   });
-  //   // setTimeout(() => {
-  //   //   this.onDonePressed();
-  //   // }, 1000);
-  // }
 
   return (
-    <Animated.View style={[baseStyle.container, localStyle.row]}>
-      <Text style={baseStyle.label}>{this.props.todo.task}</Text>
-      <TouchableHighlight
-        style={localStyle.doneButton}
-        underlayColor="#ddd"
-        onPress={this.onDonePressed.bind(this)}
-      >
-        <Image source={require('../images/done.png')} />
-      </TouchableHighlight>
-    </Animated.View>
+    // console.log(this.props.event);
+    <View style={[baseStyle.container, localStyle.row]}>
+      <Text style={baseStyle.label}>{this.props.event.Title}</Text>
+    </View>
   );
 }

@@ -7,9 +7,13 @@ const apiBasePath = 'http://api.jumpstartpakistan.com/api/v1/';
 
 class EventsApi {
   static getAllEvents() {
-    return fetch(apiBasePath)
+    const endpoint = apiBasePath + '/events';
+    console.log('getAllEvents called');
+    return fetch(endpoint)
     .then(response => response.json())
     .then((responseJson) => {
+      console.log('api get all reponse');
+      console.log(responseJson);
       events = responseJson;
       return events;
     })

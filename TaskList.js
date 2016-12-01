@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import TaskRow from './TaskRow/Component';
-import eventsApi from './api/EventsApi';
 
 const styles = StyleSheet.create({
   container: {
@@ -42,11 +41,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 10,
     paddingTop: 3,
-  }
+  },
 });
 
 class TaskList extends React.Component {
   constructor(props, context) {
+    console.log('tasklist contr fn');
     super(props, context);
 
     const ds = new ListView.DataSource({
@@ -54,68 +54,40 @@ class TaskList extends React.Component {
     });
 
     this.state = {
-      dataSource: ds.cloneWithRows(props.todos),
+      dataSource: ds.cloneWithRows(props.events),
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    const dataSource = this.state.dataSource.cloneWithRows(nextProps.todos);
+    console.log('eventsList will get props');
+    console.log(nextProps.events);
+    const dataSource = this.state.dataSource.cloneWithRows(nextProps.events);
     this.setState({ dataSource: dataSource });
   }
 
-  renderRow(todo) {
-
-    //
+  renderRow(event) {
     return (
       // <Text>{todo.task}</Text>
-      <TaskRow todo= {todo} onDone={this.props.onDone} />
+      <TaskRow event={event} />
     );
   }
 
   render() {
-    console.log('doing jsp fetch http://api.jumpstartpakistan.com/api/v1/events/');
-    fetch('http://api.jumpstartpakistan.com/api/v1/events/')
-    .then((response) => response.json())
-    .then((responseJson) => {
-        console.log(responseJson);
-      })
-    .catch((error) => {
-        console.error(error);
-      });
-
-
-      //eventsApi.getAllEvents();
-
+    console.log('eventslist render fn');
     return (
       <View style={styles.container}>
-        <View style={styles.toggleRow}>
-          <Switch value={this.props.filter !== 'pending'} style={styles.switch} onValueChange={this.props.onToggle}/>
-          <Text style={styles.toggleText}>Showing {this.props.todos.length} {this.props.filter}</Text>
-        </View>
         <ListView
-          key={this.props.todos}
+          key={this.props.events}
           dataSource={this.state.dataSource}
           enableEmptySections={true}
           renderRow={this.renderRow.bind(this)} />
-
-        <TouchableHighlight style={styles.button}
-          onPress= {this.props.onAddStarted}>
-          <Text style={styles.buttonText}>
-            Add one
-          </Text>
-        </TouchableHighlight>
-
       </View>
     );
   }
 }
 
 TaskList.propTypes = {
-  onDone: React.PropTypes.func.isRequired,
-  onToggle: React.PropTypes.func.isRequired,
-  todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-  onAddStarted: React.PropTypes.func.isRequired,
-  filter: React.PropTypes.string.isRequired,
+  events: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 };
 
 export default TaskList;

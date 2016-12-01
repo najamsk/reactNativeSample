@@ -34,10 +34,6 @@ class TaskRow extends React.Component {
     // this.state = {};
   }
 
-  onDonePressed() {
-    this.props.onDone(this.props.todo);
-  }
-
   render() {
     return Render.bind(this)(styles);
   }
@@ -45,9 +41,8 @@ class TaskRow extends React.Component {
 }
 
 TaskRow.propTypes = {
-  onDone: React.PropTypes.func.isRequired,
-  todo: React.PropTypes.shape({
-    task: React.PropTypes.string.isRequired,
+  event: React.PropTypes.shape({
+    Title: React.PropTypes.string.isRequired,
   }).isRequired,
 };
 
