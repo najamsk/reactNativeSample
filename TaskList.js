@@ -8,9 +8,11 @@ import {
   StyleSheet,
   Switch,
 } from 'react-native';
-
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import TaskRow from './TaskRow/Component';
 import eventsApi from './api/EventsApi';
+import { loadEvents } from './actions/eventActions';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,6 +60,12 @@ class TaskList extends React.Component {
       dataSource: ds.cloneWithRows(props.events),
     };
   }
+  componentDidMount() {
+    console.log('task list props');
+    console.log(this.props);
+    this.props.dispatch(loadEvents());
+  //  this.props.dispatch(loadEvents());
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log('eventsList will get props');
@@ -72,9 +80,7 @@ class TaskList extends React.Component {
       <TaskRow event={event} />
     );
   }
-  componentDidMount(){
-    //this.props.loadEvents();
-  }
+
 
   render() {
     console.log('eventslist render fn');
@@ -92,7 +98,13 @@ class TaskList extends React.Component {
 
 TaskList.propTypes = {
   events: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  dispatch: React.PropTypes.func.isRequired,
 
 };
-
-export default TaskList;
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    //actions: bindActionCreators(loadEvents, dispatch),
+  };
+}
+export default connect(null, mapDispatchToProps)(TaskList);
