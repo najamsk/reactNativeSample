@@ -17,7 +17,7 @@ import { loadEvents } from './actions/eventActions';
 const styles = StyleSheet.create({
   container: {
     paddingTop: 40,
-    backgroundColor: '#F7F7F7',
+    backgroundColor: '#FEE064',
     flex: 1,
     justifyContent: 'flex-start',
 

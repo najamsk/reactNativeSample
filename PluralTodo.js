@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Navigator,
 } from 'react-native';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 
 import TaskList from './TaskList';
 // import store from './todoStore';
@@ -57,7 +57,7 @@ class PluralTodo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FEE',
+    backgroundColor: '#FEE064',
   },
 });
 
